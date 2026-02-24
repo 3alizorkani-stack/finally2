@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Shoe | الفخامة بين يديك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #c5a059;
+            --white: #ffffff;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: var(--primary);
+            scroll-behavior: smooth;
+        }
+
+        /* قمة الصفحة - الهيدر */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* قسم عرض المنتج (Hero Section) */
+        .hero {
+            background: var(--white);
+            padding: 20px 15px 40px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        .main-img-holder {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .main-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .thumbs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .thumbs img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .thumbs img.active { border-color: var(--accent); transform: scale(1.1); }
+
+        /* وصف المنتج */
+        .description {
+            padding: 0 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .description h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .price-tag { font-size: 2.2rem; color: #b45309; font-weight: 900; margin: 15px 0; }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+            text-align: right;
+        }
+
+        .feature-item {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* زر "اطلب الآن" الجذاب */
+        .order-now-btn {
+            background: var(--accent);
+            color: var(--white);
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4);
+            animation: pulse 2s infinite;
+            border: none;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* قسم الاستمارة */
+        .form-container {
+            max-width: 480px;
+            margin: 40px auto;
+            padding: 30px 20px;
+            background: var(--white);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 { text-align: center; margin-bottom: 30px; color: var(--primary); }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f1f5f9;
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        input:focus { border-color: var(--accent); outline: none; }
+
+        /* التحكم بالكمية */
+        .qty-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .qty-btn {
+            width: 45px; height: 45px; border-radius: 10px; border: none;
+            background: var(--white); font-size: 1.5rem; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+
+        #success-page { display: none; text-align: center; padding: 100px 20px; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-weight: 900; letter-spacing: 2px;">LUXURY FOOTWEAR</div>
+</header>
+
+<div id="main-content">
+    <section class="hero">
+        <div class="main-img-holder">
+            <img src="img1.jpg" id="main-view">
+        </div>
+        <div class="thumbs">
+            <img src="img1.jpg" onclick="changeV(this)" class="active">
+            <img src="img2.jpg" onclick="changeV(this)">
+            <img src="img3.jpg" onclick="changeV(this)">
+        </div>
+
+        <div class="description">
+            <h1>حذاء الجلد الطبيعي - الإصدار الملكي</h1>
+            <div class="price-tag">5,800 د.ج</div>
+            
+            <div class="features">
+                <div class="feature-item">✅ جلد طبيعي 100%</div>
+                <div class="feature-item">✅ نعل طبي مريح</div>
+                <div class="feature-item">✅ صناعة يدوية فاخرة</div>
+                <div class="feature-item">✅ ضمان الاستبدال</div>
+            </div>
+
+            <p style="color: #64748b; margin-bottom: 30px;">
+                هذا الحذاء مصمم خصيصاً لمن يبحث عن الأناقة والراحة في وقت واحد. مناسب للمناسبات والعمل اليومي.
+            </p>
+
+            <button onclick="scrollToForm()" class="order-now-btn">اطلب الآن - املأ الاستمارة</button>
+        </div>
+    </section>
+
+    <section class="form-container" id="order-section">
+        <h2>معلومات الطلب</h2>
+        <form id="orderForm">
+            <div class="input-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="name" placeholder="أدخل اسمك هنا" required>
+            </div>
+            
+            <div class="input-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" id="phone" placeholder="06XXXXXXXX" required>
+            </div>
+
+            <div class="input-group">
+                <label>الولاية</label>
+                <select id="province" required></select>
+            </div>
+
+            <div class="input-group">
+                <label>نوع التوصيل</label>
+                <select id="shipping" required>
+                    <option value="المنزل">إلى باب المنزل</option>
+                    <option value="المكتب">استلام من المكتب</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>المقاس</label>
+                <select id="size">
+                    <option>40</option><option>41</option><option selected>42</option><option>43</option><option>44</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>الكمية</label>
+                <div class="qty-box">
+                    <button type="button" class="qty-btn" onclick="qUp(-1)">-</button>
+                    <span id="q-val" style="font-weight: 900; font-size: 1.4rem;">1</span>
+                    <button type="button" class="qty-btn" onclick="qUp(1)">+</button>
+                </div>
+            </div>
+
+            <button type="submit" id="sub-btn" class="submit-btn">إرسال الطلب الآن</button>
+        </form>
+    </section>
+</div>
+
+<div id="success-page">
+    <div style="font-size: 80px; color: #16a34a;">✓</div>
+    <h2>تم استلام طلبك بنجاح!</h2>
+    <p>شكراً لثقتك بنا. سنتصل بك خلال الساعات القادمة لتأكيد الشحن.</p>
+    <button onclick="location.reload()" class="submit-btn" style="background:#eee; color:#333; max-width: 300px;">العودة للمتجر</button>
+</div>
+
+<script>
+    // تمرير تلقائي للاستمارة
+    function scrollToForm() {
+        document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // تبديل الصور
+    function changeV(el) {
+        document.getElementById('main-view').src = el.src;
+        document.querySelectorAll('.thumbs img').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // الولايات
+    const pList = ["01-أدرار","02-الشلف","03-الأغواط","04-أم البواقي","05-باتنة","06-بجاية","07-بسكرة","08-بشار","09-البليدة","10-البويرة","11-تمنراست","12-تبسة","13-تلمسان","14-تيارت","15-تيزي وزو","16-الجزائر","17-الجلفة","18-جيجل","19-سطيف","20-سعيدة","21-سكيكدة","22-سيدي بلعباس","23-عنابة","24-قالمة","25-قسنطينة","26-المدية","27-مستغانم","28-المسيلة","29-معسكر","30-ورقلة","31-وهران","32-البيض","33-إليزي","34-برج بوعريريج","35-بومرداس","36-الطارف","37-تيندوف","38-تسمسيلت","39-الوادي","40-خنشلة","41-سوق أهراس","42-تيبازة","43-ميلة","44-عين الدفلى","45-النعامة","46-عين تموشنت","47-غرداية","48-غليزان","49-تيميمون","50-برج باجي مختار","51-أولاد جلال","52-بني عباس","53-عين صالح","54-عين قزام","55-تقرت","56-جانت","57-المغير","58-المنيعة"];
+    const sel = document.getElementById('province');
+    pList.forEach(p => { let o = document.createElement('option'); o.value=p; o.text=p; sel.add(o); });
+
+    // الكمية
+    let q = 1;
+    function qUp(v) { q = Math.max(1, q+v); document.getElementById('q-val').innerText = q; }
+
+    // الربط مع Google Sheets
+    const URL = 'https://script.google.com/macros/s/AKfycbxsKFWmYHRjBaj0YesQpEYeXJ54dysEGontpNGD7YCI07OrGH1XAQnhCGpWXkVvIEEr/exec';
+    document.getElementById('orderForm').onsubmit = e => {
+        e.preventDefault();
+        const b = document.getElementById('sub-btn');
+        b.disabled = true; b.innerText = "جاري الحفظ...";
+
+        const d = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            province: document.getElementById('province').value,
+            shipping: document.getElementById('shipping').value,
+            size: document.getElementById('size').value,
+            qty: document.getElementById('q-val').innerText
+        };
+
+        fetch(URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) })
+        .then(() => {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-page').style.display = 'block';
+            window.scrollTo(0,0);
+        });
+    };
+</script>
+
+</body>
+</html>
